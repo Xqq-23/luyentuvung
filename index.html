@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lò luyện các cao thủ ngoại ngữ 🚀</title>
+    <!-- Thêm font chữ tròn dễ nhìn (Comfortaa từ Google Fonts) -->
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #07090e;        
+            --card-bg: #10141f;       
+            --primary-color: #38bdf8;  
+            --primary-hover: #0ea5e9;
+            --accent-color: #1a2233;    
+            --text-color: #f1f5f9;     
+            --text-muted: #8b9bb4;     
+            --success-color: #22c55e;
+            --danger-color: #ef4444;
+            --warning-color: #f59e0b;
+            --border-radius: 14px;
+            --input-bg: #141b2a;
+            --border-color: #222e46;
+        }
+
+        body.light-theme {
+            --bg-dark: #f0f4f8;
+            --card-bg: #ffffff;
+            --primary-color: #0284c7;
+            --primary-hover: #0369a1;
+            --accent-color: #e2e8f0;
+            --text-color: #1e293b;
+            --text-muted: #64748b;
+            --input-bg: #f8fafc;
+            --border-color: #cbd5e1;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 680px;
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(56, 189, 248, 0.12);
+            margin-bottom: 25px;
+        }
+
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .theme-toggle-btn {
+            background: var(--accent-color);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 6px 12px;
+            font-size: 13px;
+            border-radius: 20px;
+            cursor: pointer;
+            width: auto;
+        }
+        .theme-toggle-btn:hover { opacity: 0.8; }
+
+        .welcome-banner {
+            background: var(--accent-color);
+            border-left: 4px solid var(--primary-color);
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 8px 14px;
+            border-radius: 8px;
+            transition: all 0.3s;
+            width: auto;
+        }
+
+        .tab-btn.active {
+            background: var(--primary-color);
+            color: #ffffff;
+        }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        h1 {
+            font-size: 20px;
+            color: var(--primary-color);
+            margin: 0;
+        }
+
+        .setup-box {
+            background: var(--input-bg);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .options-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .option-chip {
+            background: var(--accent-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 8px 14px;
+            font-size: 13px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: auto;
+            font-weight: 500;
+        }
+
+        .option-chip:hover {
+            border-color: var(--primary-color);
+            opacity: 0.9;
+        }
+
+        .option-chip.active {
+            background: var(--primary-color);
+            color: #ffffff;
+            border-color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        select, input[type="text"] {
+            width: 100%;
+            padding: 11px;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            border-radius: 8px;
+            outline: none;
+            font-size: 15px;
+            box-sizing: border-box;
+        }
+
+        select:focus, input[type="text"]:focus {
+            border-color: var(--primary-color);
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: var(--text-muted);
+            background: var(--accent-color);
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Ô hiển thị câu hỏi */
+        .card {
+            font-size: 40px;
+            font-weight: 700;
+            margin: 15px 0;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+            border-radius: var(--border-radius);
+            color: #1e293b;
+            border: 2px solid #7dd3fc;
+            text-align: center;
+            word-break: break-word;
+            cursor: pointer;
+            user-select: none;
+            min-height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Comfortaa', 'Comic Sans MS', cursive, sans-serif;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        /* --- FLASHCARD 3D & FONT TRÒN XANH THAN --- */
+        .flashcard-scene {
+            perspective: 1000px;
+            width: 100%;
+            margin: 15px 0;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .flashcard-object {
+            width: 100%;
+            min-height: 180px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+        }
+
+        .flashcard-object.is-flipped {
+            transform: rotateY(180deg);
+        }
+
+        .flashcard-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 20px;
+            border-radius: var(--border-radius);
+            box-sizing: border-box;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .flashcard-face-front {
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+            border: 2px solid #7dd3fc;
+            font-family: 'Comfortaa', 'Comic Sans MS', cursive, sans-serif;
+            color: #1e293b;
+            font-size: 40px;
+            font-weight: 700;
+        }
+
+        .flashcard-face-back {
+            background: linear-gradient(135deg, #e0f7ff 0%, #bae6fd 100%);
+            border: 2px solid #38bdf8;
+            transform: rotateY(180deg);
+            font-family: 'Comfortaa', 'Comic Sans MS', cursive, sans-serif;
+            color: #0f172a;
+            font-size: 19px;
+            font-weight: 600;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .sub-info {
+            font-size: 14px;
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 15px;
+            min-height: 20px;
+        }
+
+        .question-label {
+            font-size: 15px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+            width: 100%;
+        }
+
+        button:hover { background-color: var(--primary-hover); }
+
+        .action-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .btn-save-word { background-color: #8b5cf6; color: white; }
+        .btn-save-word:hover { background-color: #7c3aed; }
+
+        .btn-secondary {
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+        }
+
+        #result-message {
+            margin-top: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            min-height: 24px;
+            text-align: center;
+        }
+
+        .correct { color: var(--success-color); }
+        .incorrect { color: var(--danger-color); }
+
+        .folder-card {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .folder-info h3 { margin: 0 0 5px 0; font-size: 16px; color: var(--primary-color); }
+        .folder-info p { margin: 0; font-size: 13px; color: var(--text-muted); }
+
+        .folder-actions { display: flex; gap: 6px; }
+        .folder-actions button { padding: 6px 10px; font-size: 13px; width: auto; }
+
+        .list-container {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--input-bg);
+        }
+
+        .list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 14px;
+            gap: 10px;
+        }
+        .list-item:last-child { border-bottom: none; }
+
+        .btn-delete { background: var(--danger-color); color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; width: auto; }
+        .btn-edit { background: var(--warning-color); color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; width: auto; }
+        .btn-edit:hover { background: #d97706; }
+
+        #modal-folder-detail {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background: var(--card-bg);
+            width: 90%; max-width: 550px;
+            padding: 25px; border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+            max-height: 85vh; overflow-y: auto;
+        }
+
+        .backup-section {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        /* --- PHẦN MEME TOTORO --- */
+        .totoro-meme-section {
+            width: 100%;
+            max-width: 680px;
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border: 1px solid rgba(56, 189, 248, 0.12);
+            box-sizing: border-box;
+            margin-bottom: 30px;
+        }
+        .totoro-title {
+            font-size: 16px;
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-family: 'Comfortaa', cursive;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .totoro-meme-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 12px;
+        }
+        .totoro-meme-card {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+        .totoro-meme-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary-color);
+        }
+        .totoro-meme-img {
+            font-size: 42px;
+            margin-bottom: 8px;
+        }
+        .totoro-meme-name {
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--primary-color);
+            margin-bottom: 4px;
+            font-family: 'Comfortaa', cursive;
+        }
+        .totoro-meme-quote {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-style: italic;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="app-header">
+            <h1>🔥 Lò luyện các cao thủ ngoại ngữ</h1>
+            <button class="theme-toggle-btn" onclick="toggleTheme()" id="theme-btn">☀️ Sáng / 🌙 Tối</button>
+        </div>
+
+        <div class="welcome-banner" id="welcome-msg">✨ Chào sếp! Sẵn sàng bứt phá ngoại ngữ hôm nay chưa?</div>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('quiz')">🎯 Ôn tập & Flashcard</button>
+            <button class="tab-btn" onclick="switchTab('folders')">📂 Quản lý thư mục</button>
+            <button class="tab-btn" onclick="switchTab('saved')">⭐ Sổ tay & Chưa thuộc (<span id="saved-count">0</span>)</button>
+        </div>
+
+        <!-- TAB 1: ÔN TẬP & FLASHCARD -->
+        <div id="tab-quiz" class="tab-content active">
+            <div id="quiz-setup" class="setup-box">
+                <!-- Chọn thư mục qua Button -->
+                <div class="form-group">
+                    <label>📚 Chọn Thư mục / Chủ đề ôn:</label>
+                    <div id="section-buttons-container" class="options-grid"></div>
+                </div>
+
+                <!-- Chọn hình thức học qua Button -->
+                <div class="form-group">
+                    <label>⚙️ Hình thức học:</label>
+                    <div class="options-grid">
+                        <button type="button" class="option-chip active" onclick="selectQuizMode('quiz_meaning', this)">Nhìn từ ➔ Điền nghĩa</button>
+                        <button type="button" class="option-chip" onclick="selectQuizMode('quiz_word', this)">Nhìn nghĩa ➔ Điền từ</button>
+                        <button type="button" class="option-chip" onclick="selectQuizMode('quiz_read', this)">Nhìn từ/nghĩa ➔ Điền cách đọc</button>
+                        <button type="button" class="option-chip" onclick="selectQuizMode('flashcard', this)">Flashcard</button>
+                    </div>
+                </div>
+
+                <!-- Chọn số lượng từ qua Button -->
+                <div class="form-group">
+                    <label>🔢 Số lượng từ:</label>
+                    <div class="options-grid">
+                        <button type="button" class="option-chip" onclick="selectQuizLimit('10', this)">10 từ</button>
+                        <button type="button" class="option-chip active" onclick="selectQuizLimit('20', this)">20 từ</button>
+                        <button type="button" class="option-chip" onclick="selectQuizLimit('50', this)">50 từ</button>
+                        <button type="button" class="option-chip" onclick="selectQuizLimit('100', this)">100 từ</button>
+                        <button type="button" class="option-chip" onclick="selectQuizLimit('all', this)">Tất cả</button>
+                    </div>
+                </div>
+
+                <button onclick="startQuizSession()" style="margin-top: 5px;">🚀 Bắt đầu ngay!</button>
+            </div>
+
+            <!-- Màn hình chơi Quiz gõ phím -->
+            <div id="quiz-playing" style="display: none;">
+                <div class="stats">
+                    <div>🎯 Điểm: <span id="score">0</span></div>
+                    <div>⏳ Câu: <span id="current-q">1</span>/<span id="total-q">10</span></div>
+                </div>
+
+                <div class="question-label" id="instruction">Hãy điền đáp án:</div>
+                <div class="card" id="display-char">あ</div>
+                <div class="sub-info" id="display-hint">💡 Gợi ý</div>
+                
+                <div class="input-area" id="input-answer-box">
+                    <input type="text" id="user-answer" placeholder="Nhập đáp án..." autocomplete="off">
+                    <br><br>
+                    <button id="submit-btn" onclick="checkAnswer()">✨ Trả lời</button>
+                </div>
+
+                <div class="action-row">
+                    <button class="btn-save-word" onclick="saveCurrentWord()">⭐ Lưu vào sổ tay</button>
+                    <button class="btn-secondary" onclick="backToSetup()">🔄 Cài đặt lại</button>
+                </div>
+                <div id="result-message"></div>
+            </div>
+
+            <!-- Màn hình Flashcard với hiệu ứng lật 3D -->
+            <div id="flashcard-playing" style="display: none;">
+                <div class="stats">
+                    <div>🃏 Thẻ số: <span id="fc-current">1</span>/<span id="fc-total">10</span></div>
+                </div>
+                
+                <!-- Vùng chứa thẻ lật 3D -->
+                <div class="flashcard-scene" onclick="flipFlashcard()">
+                    <div class="flashcard-object" id="flashcard-card-obj">
+                        <div class="flashcard-face flashcard-face-front" id="fc-front">Từ</div>
+                        <div class="flashcard-face flashcard-face-back" id="fc-back">Nghĩa & Cách đọc</div>
+                    </div>
+                </div>
+
+                <div style="font-size: 13px; color: var(--text-muted); text-align: center; margin-bottom: 15px;">👉 Bấm vào thẻ để lật xem đáp án</div>
+                <div class="action-row">
+                    <button class="btn-secondary" onclick="nextFlashcard(false)">❌ Chưa thuộc</button>
+                    <button onclick="nextFlashcard(true)">✅ Đã thuộc</button>
+                </div>
+                <br>
+                <button class="btn-secondary" onclick="backToSetup()">🔄 Quay về cài đặt</button>
+            </div>
+        </div>
+
+        <!-- TAB 2: QUẢN LÝ THƯ MỤC -->
+        <div id="tab-folders" class="tab-content">
+            <h2 style="font-size: 18px; color: var(--primary-color); margin-top: 0;">📁 Quản lý thư mục & chủ đề</h2>
+            <div class="setup-box">
+                <div class="form-group">
+                    <label>Tên thư mục / Chủ đề mới (Nhật - Trung - Anh):</label>
+                    <input type="text" id="new-folder-name" placeholder="Ví dụ: Tiếng Nhật N5, HSK 1, IELTS Basic...">
+                </div>
+                <button onclick="addNewFolder()">➕ Tạo thư mục mới</button>
+            </div>
+
+            <h3 style="font-size: 15px; color: var(--text-muted);">Danh sách thư mục hiện có (Bấm vào để thêm/sửa từ):</h3>
+            <div id="folder-list-container"></div>
+
+            <div class="backup-section">
+                <button class="btn-secondary" onclick="exportData()">💾 Sao lưu dữ liệu</button>
+                <button class="btn-secondary" onclick="document.getElementById('importFile').click()">📂 Khôi phục dữ liệu</button>
+                <input type="file" id="importFile" style="display: none;" accept=".json" onchange="importData(event)">
+            </div>
+        </div>
+
+        <!-- TAB 3: SỔ TAY & CHƯA THUỘC -->
+        <div id="tab-saved" class="tab-content">
+            <h2 style="font-size: 18px; color: var(--primary-color); margin-top: 0;">⭐ Sổ tay & Từ chưa thuộc</h2>
+            
+            <div style="margin-bottom: 15px; display: flex; gap: 10px;">
+                <button class="tab-btn active" id="subtab-saved-btn" onclick="switchSubTab('saved')">Từ đã lưu sao (⭐)</button>
+                <button class="tab-btn" id="subtab-weak-btn" onclick="switchSubTab('weak')">Từ chưa thuộc cần ôn (<span id="weak-count-badge">0</span>)</button>
+            </div>
+
+            <div class="list-container" id="saved-list-container"></div>
+        </div>
+    </div>
+
+    <!-- MODAL CHI TIẾT THƯ MỤC -->
+    <div id="modal-folder-detail">
+        <div class="modal-content">
+            <h2 id="modal-folder-title" style="color: var(--primary-color); margin-top:0;">Thư mục</h2>
+            
+            <div class="setup-box" style="margin-bottom: 15px;">
+                <h4 style="margin: 0 0 10px 0; color: var(--text-color);" id="form-word-title">Thêm từ vựng mới vào thư mục này:</h4>
+                <input type="hidden" id="edit-word-index" value="-1">
+                <div class="form-group">
+                    <label>Từ gốc (Tiếng Nhật/Trung/Anh): <span style="color:var(--danger-color)">*</span></label>
+                    <input type="text" id="add-word-char" placeholder="Ví dụ: 食べる / 苹果 / Apple">
+                </div>
+                <div class="form-group">
+                    <label>Nghĩa tiếng Việt: <span style="color:var(--danger-color)">*</span></label>
+                    <input type="text" id="add-word-meaning" placeholder="Ví dụ: Ăn / Quả táo">
+                </div>
+                <div class="form-group">
+                    <label>Cách đọc / Phiên âm (Không bắt buộc):</label>
+                    <input type="text" id="add-word-romaji" placeholder="Ví dụ: taberu / píngguǒ / /ˈæp.əl/">
+                </div>
+                <div class="form-group">
+                    <label>Ghi chú / Ngữ pháp (Không bắt buộc):</label>
+                    <input type="text" id="add-word-grammar" placeholder="Ví dụ: Động từ nhóm 2...">
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button id="btn-save-word-action" onclick="addWordToActiveFolder()">➕ Thêm từ vào thư mục</button>
+                    <button id="btn-cancel-edit" class="btn-secondary" style="display: none; width: auto;" onclick="resetWordForm()">Hủy</button>
+                </div>
+            </div>
+
+            <h4 style="margin: 15px 0 5px 0; color: var(--text-muted);">Danh sách từ trong thư mục:</h4>
+            <div class="list-container" id="modal-words-list" style="max-height: 200px;"></div>
+
+            <br>
+            <button class="btn-secondary" onclick="closeFolderModal()">Đóng cửa sổ</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            const isLight = document.body.classList.contains('light-theme');
+            localStorage.setItem('lang_theme', isLight ? 'light' : 'dark');
+            updateThemeButtonText();
+        }
+
+        function updateThemeButtonText() {
+            const isLight = document.body.classList.contains('light-theme');
+            document.getElementById('theme-btn').textContent = isLight ? '🌙 Chế độ Tối' : '☀️ Chế độ Sáng';
+        }
+
+        if (localStorage.getItem('lang_theme') === 'light') {
+            document.body.classList.add('light-theme');
+        }
+        updateThemeButtonText();
+
+        const funnyWelcomes = [
+            "✨ Chào sếp! Sẵn sàng bứt phá ngoại ngữ hôm nay chưa?",
+            "🔥 Biến mọi thứ thành phản xạ tự nhiên nào!",
+            "🧠 Nạp từ vựng thông minh, học ít hiểu nhiều!",
+            "🚀 Chinh phục HSK, N5 hay IELTS trong tầm tay!",
+            "🎯 Hôm nay quyết tâm thuộc sạch số từ đã chọn nhé!",
+            "🍵 Học tiếng Trung cực chill, điểm cao không tưởng!",
+            "🐼 Sợ gì HSK, khi ta có anh em ở đây!",
+            "📱 Bớt lướt TikTok, học ngay vài từ mới nào!",
+            "💪 Học tiếng Trung đi, mai mốt mỉm cười nhận lương đô!",
+            "🎯 Hôm nay học chăm, mai cầm offer ngập tràn!",
+            "🏆 Chăm chỉ mỗi ngày, đỗ HSK trong tầm tay!",
+            "🚀 Chỉ cần bạn không bỏ cuộc, HSK sẽ lùi bước!",
+            "🌟 Mỗi ngày một từ vựng, tương lai thêm sáng lạng!",
+            "🎤 Tự tin tỏa sáng cùng ngoại ngữ đỉnh cao!",
+            "⚡ Trùm ngoại ngữ không tự sinh ra, họ ôn bài mỗi ngày!",
+            "💡 Hít một hơi thật sâu, nạp HSK vào đầu nào!",
+            "😎 Điểm cao ngút ngàn, không làm các sếp thất vọng!",
+            "☕ Vừa nhấm nháp cà phê, vừa húp trọn vẹn từ vựng!",
+            "🥳 Hết giờ lười biếng rồi, bật mood cao thủ thôi!",
+            "🌈 Chăm chỉ học hành, mai này đi du lịch Trung Hoa thả ga!"
+        ];
+        document.getElementById("welcome-msg").textContent = funnyWelcomes[Math.floor(Math.random() * funnyWelcomes.length)];
+
+        const defaultVocabulary = {
+            "Tiếng Nhật - Hiragana": [
+                { char: "あ", romaji: "a", meaning: "Chữ a", grammar: "Nguyên âm" },
+                { char: "い", romaji: "i", meaning: "Chữ i", grammar: "Nguyên âm" }
+            ],
+            "Tiếng Anh - Cơ bản": [
+                { char: "Apple", meaning: "Quả táo", grammar: "Danh từ" },
+                { char: "Book", meaning: "Quyển sách", grammar: "Danh từ" }
+            ]
+        };
+
+        let vocabularyData = JSON.parse(localStorage.getItem('lang_vocab_folders')) || defaultVocabulary;
+        let savedWords = JSON.parse(localStorage.getItem('lang_vocab_saved')) || [];
+        let weakWords = JSON.parse(localStorage.getItem('lang_vocab_weak')) || [];
+
+        let activeQuizList = [];
+        let currentIndex = 0;
+        let score = 0;
+        let currentMode = 'quiz_meaning';
+        let currentSelectedSection = 'all';
+        let currentSelectedLimit = '10';
+        let currentActiveFolder = "";
+        let currentSubTab = 'saved';
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            if (tabName === 'quiz') {
+                document.querySelectorAll('.tab-btn')[0].classList.add('active');
+                document.getElementById('tab-quiz').classList.add('active');
+                updateSectionButtons();
+                backToSetup();
+            } else if (tabName === 'folders') {
+                document.querySelectorAll('.tab-btn')[1].classList.add('active');
+                document.getElementById('tab-folders').classList.add('active');
+                renderFolderList();
+            } else if (tabName === 'saved') {
+                document.querySelectorAll('.tab-btn')[2].classList.add('active');
+                document.getElementById('tab-saved').classList.add('active');
+                renderSavedAndWeakList();
+            }
+        }
+
+        function updateSectionButtons() {
+            const folders = Object.keys(vocabularyData);
+            const container = document.getElementById("section-buttons-container");
+            
+            let html = `
+                <button type="button" class="option-chip ${currentSelectedSection === 'all' ? 'active' : ''}" onclick="selectQuizSection('all', this)">🌐 Tất cả các thư mục</button>
+                <button type="button" class="option-chip ${currentSelectedSection === 'review_weak' ? 'active' : ''}" onclick="selectQuizSection('review_weak', this)">⚠️ Ôn từ sai (${weakWords.length})</button>
+            `;
+            
+            folders.forEach(folder => {
+                const count = vocabularyData[folder].length;
+                html += `<button type="button" class="option-chip ${currentSelectedSection === folder ? 'active' : ''}" onclick="selectQuizSection('${folder.replace(/'/g, "\\'")}', this)">📂 ${folder} (${count})</button>`;
+            });
+            
+            container.innerHTML = html;
+            updateSavedCount();
+        }
+
+        function selectQuizSection(sectionValue, btnElement) {
+            currentSelectedSection = sectionValue;
+            document.querySelectorAll('#section-buttons-container .option-chip').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+        }
+
+        function selectQuizMode(modeValue, btnElement) {
+            currentMode = modeValue;
+            btnElement.parentElement.querySelectorAll('.option-chip').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+        }
+
+        function selectQuizLimit(limitValue, btnElement) {
+            currentSelectedLimit = limitValue;
+            btnElement.parentElement.querySelectorAll('.option-chip').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+        }
+
+        function backToSetup() {
+            document.getElementById("quiz-setup").style.display = 'block';
+            document.getElementById("quiz-playing").style.display = 'none';
+            document.getElementById("flashcard-playing").style.display = 'none';
+            updateSectionButtons();
+        }
+
+        function startQuizSession() {
+            let pool = [];
+            if (currentSelectedSection === 'all') {
+                for (let f in vocabularyData) {
+                    pool = pool.concat(vocabularyData[f]);
+                }
+            } else if (currentSelectedSection === 'review_weak') {
+                pool = [...weakWords];
+            } else {
+                pool = [...(vocabularyData[currentSelectedSection] || [])];
+            }
+
+            if (pool.length === 0) {
+                alert("⚠️ Thư mục này đang trống hoặc chưa có từ nào cần ôn!");
+                return;
+            }
+
+            pool.sort(() => Math.random() - 0.5);
+            let limit = currentSelectedLimit === 'all' ? pool.length : parseInt(currentSelectedLimit);
+            activeQuizList = pool.slice(0, limit);
+
+            currentIndex = 0;
+            score = 0;
+
+            document.getElementById("quiz-setup").style.display = 'none';
+
+            if (currentMode === 'flashcard') {
+                document.getElementById("quiz-playing").style.display = 'none';
+                document.getElementById("flashcard-playing").style.display = 'block';
+                loadFlashcard();
+            } else {
+                document.getElementById("flashcard-playing").style.display = 'none';
+                document.getElementById("quiz-playing").style.display = 'block';
+                loadQuestion();
+            }
+        }
+
+        function loadQuestion() {
+            if (currentIndex >= activeQuizList.length) {
+                document.getElementById("quiz-playing").innerHTML = `
+                    <h2 style="color:var(--primary-color); text-align:center;">🎉 Hoàn thành phiên ôn tập! 🎉</h2>
+                    <p style="text-align:center;">🏆 Điểm số: <b>${score}/${activeQuizList.length}</b></p>
+                    <button onclick="backToSetup(); location.reload();">🔄 Quay lại cài đặt</button>
+                `;
+                updateSavedCount();
+                return;
+            }
+
+            document.getElementById("current-q").textContent = currentIndex + 1;
+            document.getElementById("total-q").textContent = activeQuizList.length;
+            document.getElementById("user-answer").value = "";
+            document.getElementById("result-message").textContent = "";
+
+            const item = activeQuizList[currentIndex];
+
+            if (currentMode === 'quiz_meaning') {
+                // Chế độ 1: Nhìn từ -> Điền nghĩa
+                document.getElementById("instruction").textContent = "Nhìn từ ➔ Điền Nghĩa:";
+                document.getElementById("display-char").textContent = item.char;
+                document.getElementById("display-hint").textContent = `💡 Gợi ý cách đọc: ${item.romaji || '---'} ${item.grammar ? '| ' + item.grammar : ''}`;
+            } else if (currentMode === 'quiz_word') {
+                // Chế độ 2: Nhìn nghĩa -> Điền từ
+                document.getElementById("instruction").textContent = "Nhìn nghĩa ➔ Điền Từ:";
+                document.getElementById("display-char").textContent = item.meaning;
+                document.getElementById("display-hint").textContent = `💡 Gợi ý cách đọc: ${item.romaji || '---'} ${item.grammar ? '| ' + item.grammar : ''}`;
+            } else if (currentMode === 'quiz_read') {
+                // Chế độ 3: Nhìn từ/nghĩa -> Điền cách đọc
+                document.getElementById("instruction").textContent = "Nhìn từ/nghĩa ➔ Điền pinyin/romaji:";
+                document.getElementById("display-char").textContent = `${item.char} (${item.meaning})`;
+                document.getElementById("display-hint").textContent = `💡 Gợi ý ngữ pháp: ${item.grammar || '---'}`;
+            }
+            document.getElementById("user-answer").focus();
+        }
+
+        function checkAnswer() {
+            const userText = document.getElementById("user-answer").value.trim().toLowerCase();
+            const item = activeQuizList[currentIndex];
+            
+            let correctText = "";
+            if (currentMode === 'quiz_meaning') {
+                correctText = item.meaning.trim().toLowerCase();
+            } else if (currentMode === 'quiz_word') {
+                correctText = item.char.trim().toLowerCase();
+            } else if (currentMode === 'quiz_read') {
+                correctText = (item.romaji ? item.romaji : item.meaning).trim().toLowerCase();
+            }
+
+            if (userText === "") return;
+
+            const resultMsg = document.getElementById("result-message");
+            
+            if (userText === correctText || correctText.includes(userText)) {
+                resultMsg.textContent = "✨ Chính xác! Quá đỉnh 👏";
+                resultMsg.className = "correct";
+                score++;
+                
+                weakWords = weakWords.filter(w => w.char !== item.char);
+                localStorage.setItem('lang_vocab_weak', JSON.stringify(weakWords));
+
+                currentIndex++;
+                setTimeout(loadQuestion, 1000);
+            } else {
+                resultMsg.textContent = `❌ Sai rồi! Đáp án đúng: ${correctText}`;
+                resultMsg.className = "incorrect";
+
+                if (!weakWords.some(w => w.char === item.char)) {
+                    weakWords.push(item);
+                    localStorage.setItem('lang_vocab_weak', JSON.stringify(weakWords));
+                }
+
+                currentIndex++;
+                setTimeout(loadQuestion, 1800);
+            }
+            updateSavedCount();
+        }
+
+        document.getElementById("user-answer").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") checkAnswer();
+        });
+
+        let isFlipped = false;
+        function loadFlashcard() {
+            if (currentIndex >= activeQuizList.length) {
+                document.getElementById("flashcard-playing").innerHTML = `
+                    <h2 style="color:var(--primary-color); text-align:center;">🎉 Đã ôn xong bộ Flashcard! 🎉</h2>
+                    <button onclick="backToSetup(); location.reload();">🔄 Quay lại cài đặt</button>
+                `;
+                updateSavedCount();
+                return;
+            }
+            document.getElementById("fc-current").textContent = currentIndex + 1;
+            document.getElementById("fc-total").textContent = activeQuizList.length;
+            
+            isFlipped = false;
+            document.getElementById("flashcard-card-obj").classList.remove("is-flipped");
+            
+            const item = activeQuizList[currentIndex];
+            document.getElementById("fc-front").textContent = item.char;
+            document.getElementById("fc-back").innerHTML = `
+                <div style="font-size: 22px; font-weight: 600; margin-bottom: 8px;">📖 Nghĩa: ${item.meaning}</div>
+                <div style="font-size: 16px; font-weight: 600; margin-bottom: 5px;">🗣️ Cách đọc: ${item.romaji || '---'}</div>
+                <div style="font-size: 14px; font-weight: 600; opacity: 0.85;">💡 Ghi chú: ${item.grammar || '---'}</div>
+            `;
+        }
+
+        function flipFlashcard() {
+            isFlipped = !isFlipped;
+            const cardObj = document.getElementById("flashcard-card-obj");
+            if (isFlipped) {
+                cardObj.classList.add("is-flipped");
+            } else {
+                cardObj.classList.remove("is-flipped");
+            }
+        }
+
+        function nextFlashcard(known) {
+            const item = activeQuizList[currentIndex];
+            if (!known) {
+                if (!weakWords.some(w => w.char === item.char)) {
+                    weakWords.push(item);
+                    localStorage.setItem('lang_vocab_weak', JSON.stringify(weakWords));
+                }
+            } else {
+                weakWords = weakWords.filter(w => w.char !== item.char);
+                localStorage.setItem('lang_vocab_weak', JSON.stringify(weakWords));
+            }
+            currentIndex++;
+            loadFlashcard();
+            updateSavedCount();
+        }
+
+        function addNewFolder() {
+            const folderName = document.getElementById("new-folder-name").value.trim();
+            if (!folderName) {
+                alert("⚠️ Vui lòng nhập tên thư mục!");
+                return;
+            }
+            if (vocabularyData[folderName]) {
+                alert("⚠️ Thư mục này đã tồn tại!");
+                return;
+            }
+            vocabularyData[folderName] = [];
+            localStorage.setItem('lang_vocab_folders', JSON.stringify(vocabularyData));
+            document.getElementById("new-folder-name").value = "";
+            renderFolderList();
+            alert("🎉 Tạo thư mục thành công!");
+        }
+
+        function renderFolderList() {
+            const container = document.getElementById("folder-list-container");
+            container.innerHTML = "";
+            const folders = Object.keys(vocabularyData);
+
+            if (folders.length === 0) {
+                container.innerHTML = `<div style="padding:15px; text-align:center; color:var(--text-muted);">📭 Chưa có thư mục nào.</div>`;
+                return;
+            }
+
+            folders.forEach(folder => {
+                container.innerHTML += `
+                    <div class="folder-card">
+                        <div class="folder-info">
+                            <h3>📁 ${folder}</h3>
+                            <p>Số lượng từ: ${vocabularyData[folder].length} từ</p>
+                        </div>
+                        <div class="folder-actions">
+                            <button class="btn-edit" onclick="openFolderModal('${folder.replace(/'/g, "\\'")}')">✏️ Chi tiết / Thêm từ</button>
+                            <button class="btn-delete" onclick="deleteFolder('${folder.replace(/'/g, "\\'")}')">🗑️ Xóa</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function deleteFolder(folderName) {
+            if (confirm(`Bạn có chắc chắn muốn xóa thư mục "${folderName}" không?`)) {
+                delete vocabularyData[folderName];
+                localStorage.setItem('lang_vocab_folders', JSON.stringify(vocabularyData));
+                renderFolderList();
+            }
+        }
+
+        function openFolderModal(folderName) {
+            currentActiveFolder = folderName;
+            document.getElementById("modal-folder-title").textContent = `📂 Thư mục: ${folderName}`;
+            document.getElementById("modal-folder-detail").style.display = "flex";
+            resetWordForm();
+            renderModalWordsList();
+        }
+
+        function closeFolderModal() {
+            document.getElementById("modal-folder-detail").style.display = "none";
+            updateSectionButtons();
+        }
+
+        function renderModalWordsList() {
+            const container = document.getElementById("modal-words-list");
+            container.innerHTML = "";
+            const words = vocabularyData[currentActiveFolder] || [];
+
+            if (words.length === 0) {
+                container.innerHTML = `<div style="padding:15px; text-align:center; color:var(--text-muted);">📭 Thư mục chưa có từ vựng nào.</div>`;
+                return;
+            }
+
+            words.forEach((word, index) => {
+                container.innerHTML += `
+                    <div class="list-item">
+                        <div>
+                            <b style="color:var(--primary-color); font-size:16px;">${word.char}</b> 
+                            <span style="color:var(--text-muted)">(${word.romaji || '---'})</span><br>
+                            <span>Nghĩa: <b>${word.meaning}</b></span> 
+                            <span style="color:var(--text-muted); font-size:12px;">${word.grammar ? '| ' + word.grammar : ''}</span>
+                        </div>
+                        <div style="display:flex; gap:6px;">
+                            <button class="btn-edit" onclick="editWordInFolder(${index})">Sửa</button>
+                            <button class="btn-delete" onclick="deleteWordFromFolder(${index})">Xóa</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function addWordToActiveFolder() {
+            const char = document.getElementById("add-word-char").value.trim();
+            const meaning = document.getElementById("add-word-meaning").value.trim();
+            const romaji = document.getElementById("add-word-romaji").value.trim();
+            const grammar = document.getElementById("add-word-grammar").value.trim();
+            const editIndex = parseInt(document.getElementById("edit-word-index").value);
+
+            if (!char || !meaning) {
+                alert("⚠️ Vui lòng nhập Từ gốc và Nghĩa tiếng Việt!");
+                return;
+            }
+
+            if (editIndex === -1) {
+                vocabularyData[currentActiveFolder].push({ char, meaning, romaji, grammar });
+            } else {
+                vocabularyData[currentActiveFolder][editIndex] = { char, meaning, romaji, grammar };
+            }
+
+            localStorage.setItem('lang_vocab_folders', JSON.stringify(vocabularyData));
+            resetWordForm();
+            renderModalWordsList();
+        }
+
+        function editWordInFolder(index) {
+            const word = vocabularyData[currentActiveFolder][index];
+            document.getElementById("add-word-char").value = word.char;
+            document.getElementById("add-word-meaning").value = word.meaning;
+            document.getElementById("add-word-romaji").value = word.romaji || "";
+            document.getElementById("add-word-grammar").value = word.grammar || "";
+            document.getElementById("edit-word-index").value = index;
+            document.getElementById("form-word-title").textContent = "Sửa từ vựng:";
+            document.getElementById("btn-save-word-action").textContent = "💾 Cập nhật từ";
+            document.getElementById("btn-cancel-edit").style.display = "block";
+        }
+
+        function deleteWordFromFolder(index) {
+            vocabularyData[currentActiveFolder].splice(index, 1);
+            localStorage.setItem('lang_vocab_folders', JSON.stringify(vocabularyData));
+            renderModalWordsList();
+        }
+
+        function resetWordForm() {
+            document.getElementById("add-word-char").value = "";
+            document.getElementById("add-word-meaning").value = "";
+            document.getElementById("add-word-romaji").value = "";
+            document.getElementById("add-word-grammar").value = "";
+            document.getElementById("edit-word-index").value = "-1";
+            document.getElementById("form-word-title").textContent = "Thêm từ vựng mới vào thư mục này:";
+            document.getElementById("btn-save-word-action").textContent = "➕ Thêm từ vào thư mục";
+            document.getElementById("btn-cancel-edit").style.display = "none";
+        }
+
+        function saveCurrentWord() {
+            const item = activeQuizList[currentIndex];
+            if (!savedWords.some(w => w.char === item.char)) {
+                savedWords.push(item);
+                localStorage.setItem('lang_vocab_saved', JSON.stringify(savedWords));
+                updateSavedCount();
+                alert("⭐ Đã lưu từ này vào sổ tay thành công!");
+            } else {
+                alert("ℹ️ Từ này đã có sẵn trong sổ tay của bạn rồi!");
+            }
+        }
+
+        function updateSavedCount() {
+            document.getElementById("saved-count").textContent = savedWords.length;
+            document.getElementById("weak-count-badge").textContent = weakWords.length;
+        }
+
+        function switchSubTab(subTab) {
+            currentSubTab = subTab;
+            if (subTab === 'saved') {
+                document.getElementById("subtab-saved-btn").classList.add("active");
+                document.getElementById("subtab-weak-btn").classList.remove("active");
+            } else {
+                document.getElementById("subtab-weak-btn").classList.add("active");
+                document.getElementById("subtab-saved-btn").classList.remove("active");
+            }
+            renderSavedAndWeakList();
+        }
+
+        function renderSavedAndWeakList() {
+            const container = document.getElementById("saved-list-container");
+            container.innerHTML = "";
+            const list = currentSubTab === 'saved' ? savedWords : weakWords;
+
+            if (list.length === 0) {
+                container.innerHTML = `<div style="padding:15px; text-align:center; color:var(--text-muted);">📭 Danh sách trống.</div>`;
+                updateSavedCount();
+                return;
+            }
+
+            list.forEach((word, index) => {
+                container.innerHTML += `
+                    <div class="list-item">
+                        <div>
+                            <b style="color:var(--primary-color); font-size:16px;">${word.char}</b> 
+                            <span style="color:var(--text-muted)">(${word.romaji || '---'})</span><br>
+                            <span>Nghĩa: <b>${word.meaning}</b></span>
+                        </div>
+                        <button class="btn-delete" onclick="removeItemFromList('${word.char}', '${currentSubTab}')">Xóa</button>
+                    </div>
+                `;
+            });
+            updateSavedCount();
+        }
+
+        function removeItemFromList(char, type) {
+            if (type === 'saved') {
+                savedWords = savedWords.filter(w => w.char !== char);
+                localStorage.setItem('lang_vocab_saved', JSON.stringify(savedWords));
+            } else {
+                weakWords = weakWords.filter(w => w.char !== char);
+                localStorage.setItem('lang_vocab_weak', JSON.stringify(weakWords));
+            }
+            renderSavedAndWeakList();
+        }
+
+        function exportData() {
+            const data = {
+                folders: vocabularyData,
+                saved: savedWords,
+                weak: weakWords
+            };
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data, null, 2));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", "luyen_ngoai_ngu_backup.json");
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+        }
+
+        function importData(event) {
+            const fileReader = new FileReader();
+            if (event.target.files[0]) {
+                fileReader.readAsText(event.target.files[0], "UTF-8");
+                fileReader.onload = function(e) {
+                    try {
+                        const parsed = JSON.parse(e.target.result);
+                        if (parsed.folders) {
+                            vocabularyData = parsed.folders;
+                            localStorage.setItem('lang_vocab_folders', JSON.stringify(vocabularyData));
+                        }
+                        if (parsed.saved) {
+                            savedWords = parsed.saved;
+                            localStorage.setItem('lang_vocab_saved', JSON.stringify(savedWords));
+                        }
+                        if (parsed.weak) {
+                            weakWords = parsed.weak;
+                            localStorage.setItem('lang_vocab_weak', JSON.stringify(weakWords));
+                        }
+                        updateSectionButtons();
+                        alert("🎉 Khôi phục dữ liệu thành công!");
+                    } catch (err) {
+                        alert("❌ File không hợp lệ hoặc bị lỗi định dạng!");
+                    }
+                }
+            }
+        }
+
+        // Khởi tạo ban đầu
+        updateSectionButtons();
+    </script>
+</body>
+</html>
